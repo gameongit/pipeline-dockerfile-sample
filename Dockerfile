@@ -1,7 +1,7 @@
-# Base image
-FROM ubuntu
-
-# Do image configuraton now
-RUN /bin/bash -c 'echo This is fine'
-ENV myCustomEnvVar="This is a sample." \
-    otherEnvVar="This is also a sample."
+ARG  CODE_VERSION=latest
+FROM ubuntu:${CODE_VERSION}
+MAINTAINER Lalitsharma
+RUN apt-get update 
+RUN apt-get install -y nginx curl vim
+EXPOSE 80/tcp
+ENTRYPOINT service nginx restart && bash
